@@ -18,3 +18,8 @@ Examples:
   - [commit on `main` that failed
     tests](https://github.com/matthewhughes-uw/gh-workflow-test/actions/runs/9079804420)
     the change was not deployed
+
+See also:
+
+  - [`74d9fa46a15f4293499e0ee1b3da376f6c7c83d3`](https://github.com/matthewhughes-uw/gh-workflow-test/commit/74d9fa46a15f4293499e0ee1b3da376f6c7c83d3):
+    adding a job output and passing it down to the deploy step
