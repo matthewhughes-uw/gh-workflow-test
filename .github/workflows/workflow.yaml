@@ -1,0 +1,26 @@
+name: Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  lint-code:
+    uses: ./.github/workflows/lint-code.yaml
+    secrets: inherit
+  test-code:
+    uses: ./.github/workflows/test-code.yaml
+    secrets: inherit
+  deploy:
+    needs:
+      - lint-code
+      - test-code
+    if: github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy.yaml
+    secrets: inherit

@@ -1,0 +1,10 @@
+name: lint-code
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: lint
+        run: echo 'linting the code'
