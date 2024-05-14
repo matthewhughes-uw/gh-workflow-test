@@ -8,7 +8,3 @@ jobs:
     steps:
       - name: test
         run: echo 'testing the code'
-      - name: inject failure
-        run: |
-          echo "tests failed" >&2
-          exit 1
