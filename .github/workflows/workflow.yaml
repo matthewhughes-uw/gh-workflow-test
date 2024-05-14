@@ -17,10 +17,13 @@ jobs:
   test-code:
     uses: ./.github/workflows/test-code.yaml
     secrets: inherit
+
   deploy:
     needs:
       - lint-code
       - test-code
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yaml
+    with:
+      test-output: ${{ needs.test-code.outputs.testrun }}
     secrets: inherit

@@ -1,6 +1,9 @@
 name: test-code
 on:
   workflow_call:
+    outputs:
+      testrun:
+        value: ${{ jobs.test.outputs.testrun }}
 
 jobs:
   test:
@@ -8,3 +11,11 @@ jobs:
     steps:
       - name: test
         run: echo 'testing the code'
+      - name: set output
+        id: set-output
+        run: echo 'testrun=success' >> "$GITHUB_OUTPUT"
+      - name: check output
+        run: |
+          echo ${{ steps.set-output.outputs.testrun }}
+    outputs:
+      testrun: ${{ steps.set-output.outputs.testrun }}
