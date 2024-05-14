@@ -8,3 +8,8 @@ jobs:
     steps:
       - name: test
         run: echo 'testing the code'
+      - name: set output
+        id: set-output
+        run: echo 'testrun=success' >> "$GITHUB_OUTPUT"
+    outputs:
+      testrun: ${{ steps.set-output.outputs.testrun }}

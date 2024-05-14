@@ -1,6 +1,10 @@
 name: deploy
 on:
   workflow_call:
+    inputs:
+      test-output:
+        required: false
+        type: string
 
 jobs:
   deploy:
@@ -8,3 +12,6 @@ jobs:
     steps:
       - name: deploy
         run: echo 'deploying the code'
+      - name: report test output
+        run: |
+          echo "test output: ${{ inputs.test-output }}"

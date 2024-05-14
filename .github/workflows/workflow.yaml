@@ -23,4 +23,6 @@ jobs:
       - test-code
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/deploy.yaml
+    with:
+      test-output: ${{ needs.test-code.outputs.testrun }}
     secrets: inherit
