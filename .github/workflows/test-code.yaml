@@ -4,6 +4,8 @@ on:
     outputs:
       testrun:
         value: ${{ jobs.test.outputs.testrun }}
+      wat:
+        value: ${{ jobs.test.outputs.wat }}
 
 jobs:
   test:
@@ -13,9 +15,12 @@ jobs:
         run: echo 'testing the code'
       - name: set output
         id: set-output
-        run: echo 'testrun=success' >> "$GITHUB_OUTPUT"
+        run: |
+          echo 'testrun=success' >> "$GITHUB_OUTPUT"
+          echo 'other=foo' >> "$GITHUB_OUTPUT"
       - name: check output
         run: |
           echo ${{ steps.set-output.outputs.testrun }}
     outputs:
       testrun: ${{ steps.set-output.outputs.testrun }}
+      wat: ${{ toJSON(steps.set-output.outputs.*) }}

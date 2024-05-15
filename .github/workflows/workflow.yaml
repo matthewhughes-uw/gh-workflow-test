@@ -18,6 +18,12 @@ jobs:
     uses: ./.github/workflows/test-code.yaml
     secrets: inherit
 
+  test-output:
+    needs: test-code
+    runs-on: ubuntu-latest
+    steps:
+      - run: jq --raw-output '.[]' <<< '${{ needs.test-code.outputs.wat }}'
+
   deploy:
     needs:
       - lint-code
