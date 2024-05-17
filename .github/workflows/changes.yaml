@@ -16,6 +16,6 @@ jobs:
         with:
           ref: ${{ github.event.after }}
       - name: print changes
-        run: git log --name-only ${{ github.event.before }}...${{ github.event.after }}
+        run: git diff --name-only ${{ github.event.before }}...${{ github.event.after }}
 
 
