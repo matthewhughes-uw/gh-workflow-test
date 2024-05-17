@@ -1,0 +1,21 @@
+name: Changes
+
+on:
+  push:
+
+jobs:
+  what-changed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout before
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.before }}
+      - name: Checkout after
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.after }}
+      - name: print changes
+        run: git log --name-only ${{ github.event.before }}...${{ github.event.after }}
+
+
