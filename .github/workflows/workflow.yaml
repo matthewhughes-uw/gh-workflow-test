@@ -17,6 +17,25 @@ jobs:
   test-code:
     uses: ./.github/workflows/test-code.yaml
     secrets: inherit
+  blah:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup env
+        uses: crazy-max/ghaction-github-runtime@v3
+      - name: setup data
+        run: echo 'data' > file.txt
+      - name: Cache file
+        id: cache-file
+        uses: actions/cache@v4
+        with:
+          path: file.txt
+          key: ${{ runner.os }}-primes
+      - name: query
+        run: |
+          curl --location --header "Authorization: Bearer $ACTIONS_RUNTIME_TOKEN" "$ACTIONS_CACHE_URL/_apis/artifactcache/get?keys=Linux-primes"
+      - name: env
+        run: env | sort
+
 
   deploy:
     needs:
